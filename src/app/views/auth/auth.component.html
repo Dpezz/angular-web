@@ -1,0 +1,18 @@
+<div class="container">
+  <h1 class="text-center">
+    {{ title }}
+  </h1>
+  <div class="example-container">
+    <mat-form-field>
+      <input matInput placeholder="Username" [(ngModel)]="auth.username">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput type="password" placeholder="Password" [(ngModel)]="auth.password">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="login()">
+      <mat-icon aria-label="Example icon-button with a heart icon">input</mat-icon>
+      Login</button>
+  </div>
+</div>
