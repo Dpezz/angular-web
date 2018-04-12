@@ -20,7 +20,12 @@ export class AuthComponent {
     login() {
         this.AuthService.login(this.auth)
             .then(response => {
-                this.AuthService.show();
+                if (response['token']) {
+                    localStorage.setItem('access_token', response['token']);
+                    this.AuthService.show();
+                } else {
+                    this.error = response;
+                }
             }).catch(error => {
                 this.error = 'User or Password incorrect!';
             });

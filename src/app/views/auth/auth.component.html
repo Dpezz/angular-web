@@ -2,17 +2,19 @@
   <h1 class="text-center">
     {{ title }}
   </h1>
-  <div class="example-container">
+
+  <form #myForm="ngForm" class="example-container" (ngSubmit)="login()">
     <mat-form-field>
-      <input matInput placeholder="Username" [(ngModel)]="auth.username">
+      <input matInput placeholder="Username" [(ngModel)]="auth.username" name="username" required>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput type="password" placeholder="Password" [(ngModel)]="auth.password">
+      <input matInput type="password" placeholder="Password" [(ngModel)]="auth.password" name="password" required>
     </mat-form-field>
 
-    <button mat-raised-button color="primary" (click)="login()">
+    <button mat-raised-button color="primary" type="submit" [disabled]="!myForm.valid" (ngSubmit)="login()">
       <mat-icon aria-label="Example icon-button with a heart icon">input</mat-icon>
       Login</button>
-  </div>
+  </form>
+  <p class="text-center">{{ error?.message }}</p>
 </div>

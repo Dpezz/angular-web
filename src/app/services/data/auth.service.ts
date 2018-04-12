@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { DataService } from '../base/data.service';
 
 // const helper = new JwtHelperService();
 
@@ -14,22 +15,19 @@ export class AuthService {
     constructor(
         public httpClient: HttpClient,
         public jwtHelper: JwtHelperService,
-        private router: Router
+        private router: Router,
+        public dataService: DataService
     ) { }
 
     login(auth) {
-        let datos = { rut: auth.username, password: auth.password };
-        return this.httpClient.post('http://localhost:8000/api/auth', datos)
-            .toPromise()
-            .then(response => {
-                localStorage.setItem('access_token', response['token']);
-            })
+        let datos = { email: auth.username, password: auth.password };
+        return this.dataService.post('auth', datos)
+            .then(response => response)
             .catch(this.handleError);
     }
 
     show() {
-        return this.httpClient.get('http://localhost:8000/api/auth')
-            .toPromise()
+        return this.dataService.all('auth')
             .then(response => {
                 localStorage.setItem('user', JSON.stringify(response));
                 this.router.navigate(['dashboard']);
