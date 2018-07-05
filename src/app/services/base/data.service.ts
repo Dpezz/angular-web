@@ -3,7 +3,7 @@ import { Headers, Http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { ConstantsService } from '../../config/constants.service';
 
-import 'rxjs/add/operator/toPromise';
+// import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class DataService {
